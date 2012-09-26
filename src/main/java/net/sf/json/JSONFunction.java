@@ -33,6 +33,8 @@ public class JSONFunction implements Serializable {
    /** constant array for empty parameters */
    private static final String[] EMPTY_PARAM_ARRAY = new String[0];
    
+   private static final String JSONLIB_SKIPMAYBE = "jsonlib.skipMaybe";
+   private static boolean skipMaybe=!"false".equals(System.getProperty(JSONLIB_SKIPMAYBE));
 
    /**
     * Constructs a JSONFunction from a text representation
@@ -95,7 +97,8 @@ public class JSONFunction implements Serializable {
          return false;
       }
 
-      if( obj instanceof String ){
+      //2012/09/26 modified
+      if( !skipMaybe==false && obj instanceof String ){
          try{
             JSONFunction other = parse( (String) obj );
             return equals( other );

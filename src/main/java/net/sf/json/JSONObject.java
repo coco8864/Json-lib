@@ -113,6 +113,9 @@ import org.apache.commons.logging.LogFactory;
 public final class JSONObject extends AbstractJSON implements JSON, Map, Comparable {
 
    private static final Log log = LogFactory.getLog( JSONObject.class );
+   
+   private static final String JSONLIB_SKIPMAYBE = "jsonlib.skipMaybe";
+   private static boolean skipMaybe=!"false".equals(System.getProperty(JSONLIB_SKIPMAYBE));
 
    /**
     * Creates a JSONObject.<br>
@@ -902,7 +905,7 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
             throw new ClassCastException("JSON keys must be strings.");
          }
          String key = String.valueOf( k );
-         if( "null".equals( key )){
+         if( skipMaybe==false && "null".equals( key )){
             throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
          }
          if( exclusions.contains( key ) ){
@@ -959,10 +962,19 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
                case '}':
                   fireObjectEndEvent( jsonConfig );
                   return jsonObject;
+               case '"':
+               case '\'':
+            	  if(skipMaybe){
+                      key=tokener.nextString(c);
+                      break;
+            	  }
                default:
                   tokener.back();
-                  key = tokener.nextValue( jsonConfig )
-                        .toString();
+                  if(skipMaybe){
+                      key = tokener.nextTo(':');
+                  }else{
+                      key = tokener.nextValue(jsonConfig).toString();
+                  }
             }
 
             /*

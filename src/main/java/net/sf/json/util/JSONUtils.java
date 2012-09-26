@@ -60,6 +60,9 @@ public final class JSONUtils {
 
    private static final MorpherRegistry morpherRegistry = new MorpherRegistry();
 
+   private static final String JSONLIB_SKIPMAYBE = "jsonlib.skipMaybe";
+   private static boolean skipMaybe=!"false".equals(System.getProperty(JSONLIB_SKIPMAYBE));
+
    static{
       // register standard morphers
       MorphUtils.registerStandardMorphers( morpherRegistry );
@@ -274,7 +277,8 @@ public final class JSONUtils {
     * ]?\\{.*\\}$"</nowrap>
     */
    public static boolean isFunction( Object obj ) {
-      if( obj instanceof String ){
+      //2012/09/26 modified
+      if( skipMaybe==false && obj instanceof String ){
          String str = (String) obj;
          return str.startsWith( FUNCTION_PREFIX ) && RegexpUtils.getMatcher( FUNCTION_PATTERN, true ).matches( str );
       }
@@ -386,9 +390,13 @@ public final class JSONUtils {
     * </ul>
     */
    public static boolean mayBeJSON( String string ) {
+      //2012/09/26 modified
+      if(skipMaybe){
+          return false;
+      }
       return string != null
             && ("null".equals( string )
-                  || (string.startsWith( "[" ) && string.endsWith( "]" )) || (string.startsWith( "{" ) && string.endsWith( "}" )));
+            || (string.startsWith( "[" ) && string.endsWith( "]" )) || (string.startsWith( "{" ) && string.endsWith( "}" )));
    }
 
    /**
