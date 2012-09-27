@@ -52,11 +52,12 @@ class TestMetaClasses extends GroovyTestCase {
 	   JSONAssert.assertEquals expected, actual
 	}
 
+/* skipMaybe
 	void testTypeConversion_String_to_JSONObject(){
 	   def expected = new JSONObject().element("key","value")
 	   def actual = "{'key':'value'}" as JSONObject
 	   JSONAssert.assertEquals expected, actual
-	}
+	}*/
 
 	void testTypeConversion_String_to_JSONArray(){
 	   def expected = new JSONArray()
