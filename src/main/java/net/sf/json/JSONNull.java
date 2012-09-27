@@ -26,6 +26,9 @@ import java.io.Writer;
  * @author JSON.org
  */
 public final class JSONNull implements JSON {
+   private static final String JSONLIB_SKIPMAYBE = "jsonlib.skipMaybe";
+   private static boolean skipMaybe=!"false".equals(System.getProperty(JSONLIB_SKIPMAYBE));
+
    /** singleton instance */
    private static JSONNull instance;
 
@@ -52,9 +55,15 @@ public final class JSONNull implements JSON {
     *         null.
     */
    public boolean equals( Object object ) {
-      return object == null || object == this || object == instance
-            || (object instanceof JSONObject && ((JSONObject) object).isNullObject())
-            || "null".equals( object );
+      boolean result=( object == null || object == this || object == instance
+              || (object instanceof JSONObject && ((JSONObject) object).isNullObject()) );
+      if(skipMaybe||result){
+          return result;
+      }
+      return "null".equals( object );
+//2012/09/26 modified
+//            || (object instanceof JSONObject && ((JSONObject) object).isNullObject())
+//            || "null".equals( object );
    }
 
    public int hashCode() {

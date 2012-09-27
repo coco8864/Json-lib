@@ -1,0 +1,110 @@
+skipMaybe:true
+{obj:[1,3]}=>{"obj":[1,3]}
+{obj:{a:2}}=>{"obj":{"a":2}}
+{obj:null}=>{"obj":null}
+{obj:800}=>{"obj":800}
+{obj:-5}=>{"obj":-5}
+{obj:0}=>{"obj":0}
+{obj:true}=>{"obj":true}
+{obj:false}=>{"obj":false}
+{obj:function(){}}=>{"obj":function(){}}
+{obj:undefined}=>error:Unquotted string 'undefined'
+{obj:'[1,3]'}=>{"obj":"[1,3]"}
+{obj:'{a:2}'}=>{"obj":"{a:2}"}
+{obj:'null'}=>{"obj":"null"}***
+{obj:'800'}=>{"obj":"800"}
+{obj:'-5'}=>{"obj":"-5"}
+{obj:'0'}=>{"obj":"0"}
+{obj:'true'}=>{"obj":"true"}
+{obj:'false'}=>{"obj":"false"}
+{obj:'function(){}'}=>{"obj":"function(){}"}***
+{obj:'undefined'}=>{"obj":"undefined"}
+{[1,3]:123}=>{"[1,3]":123}
+{{a:2}:123}=>{"{a":2} XXX
+{null:123}=>{"null":123}
+{800:123}=>{"800":123}
+{-5:123}=>{"-5":123}
+{0:123}=>{"0":123}
+{true:123}=>{"true":123}
+{false:123}=>{"false":123}
+{function(){}:123}=>{"function(){}":123}***
+{undefined:123}=>{"undefined":123}
+{'[1,3]':123}=>{"[1,3]":123}
+{'{a:2}':123}=>{"{a:2}":123}
+{'null':123}=>{"null":123}
+{'800':123}=>{"800":123}
+{'-5':123}=>{"-5":123}
+{'0':123}=>{"0":123}
+{'true':123}=>{"true":123}
+{'false':123}=>{"false":123}
+{'function(){}':123}=>{"function(){}":123}***
+{'undefined':123}=>{"undefined":123}
+{obj:{obj:[1,3]}}=>{"obj":{"obj":[1,3]}}
+{obj:{obj:{a:2}}}=>{"obj":{"obj":{"a":2}}}
+{obj:{obj:null}}=>{"obj":{"obj":null}}
+{obj:{obj:800}}=>{"obj":{"obj":800}}
+{obj:{obj:-5}}=>{"obj":{"obj":-5}}
+{obj:{obj:0}}=>{"obj":{"obj":0}}
+{obj:{obj:true}}=>{"obj":{"obj":true}}
+{obj:{obj:false}}=>{"obj":{"obj":false}}
+{obj:{obj:function(){}}}=>{"obj":{"obj":function(){}}}
+{obj:{obj:undefined}}=>error:Unquotted string 'undefined'
+{obj:{obj:'[1,3]'}}=>{"obj":{"obj":"[1,3]"}}***
+{obj:{obj:'{a:2}'}}=>{"obj":{"obj":"{a:2}"}}***
+{obj:{obj:'null'}}=>{"obj":{"obj":"null"}}***
+{obj:{obj:'800'}}=>{"obj":{"obj":"800"}}
+{obj:{obj:'-5'}}=>{"obj":{"obj":"-5"}}
+{obj:{obj:'0'}}=>{"obj":{"obj":"0"}}
+{obj:{obj:'true'}}=>{"obj":{"obj":"true"}}
+{obj:{obj:'false'}}=>{"obj":{"obj":"false"}}
+{obj:{obj:'function(){}'}}=>{"obj":{"obj":"function(){}"}}***
+{obj:{obj:'undefined'}}=>{"obj":{"obj":"undefined"}}
+{obj:{[1,3]:123}}=>{"obj":{"[1,3]":123}}
+{obj:{{a:2}:123}}=>error:Expected a ',' or '}' at character 12 of {obj:{{a:2}:123}}XXX
+{obj:{null:123}}=>{"obj":{"null":123}}***
+{obj:{800:123}}=>{"obj":{"800":123}}
+{obj:{-5:123}}=>{"obj":{"-5":123}}
+{obj:{0:123}}=>{"obj":{"0":123}}
+{obj:{true:123}}=>{"obj":{"true":123}}
+{obj:{false:123}}=>{"obj":{"false":123}}
+{obj:{function(){}:123}}=>{"obj":{"function(){}":123}}***
+{obj:{undefined:123}}=>{"obj":{"undefined":123}}
+{obj:{'[1,3]':123}}=>{"obj":{"[1,3]":123}}***
+{obj:{'{a:2}':123}}=>{"obj":{"{a:2}":123}}***
+{obj:{'null':123}}=>{"obj":{"null":123}}***
+{obj:{'800':123}}=>{"obj":{"800":123}}
+{obj:{'-5':123}}=>{"obj":{"-5":123}}
+{obj:{'0':123}}=>{"obj":{"0":123}}
+{obj:{'true':123}}=>{"obj":{"true":123}}
+{obj:{'false':123}}=>{"obj":{"false":123}}
+{obj:{'function(){}':123}}=>{"obj":{"function(){}":123}}***
+{obj:{'undefined':123}}=>{"obj":{"undefined":123}}
+
+Failed tests:
+  testHashCode_values_strings(net.sf.json.TestJSONObjectEqualsHashCodeCompareTo)
+  testHashCode_strings_values(net.sf.json.TestJSONObjectEqualsHashCodeCompareTo)
+  testWriteObject_withText_2(net.sf.json.xml.TestXMLSerializer_writes)
+  testBuildObject_GString_with_JSON(net.sf.json.groovy.TestJsonGroovyBuilder)
+  testBuildObject_GString_text(net.sf.json.groovy.TestJsonGroovyBuilder)
+  testFromBean_DynaBean(net.sf.json.TestJSONObject)
+  testFromDynaBean_full(net.sf.json.TestJSONObject)
+  testOptJSONArray(net.sf.json.TestJSONObject)
+  testOptJSONObject(net.sf.json.TestJSONObject)
+  testIsFunction(net.sf.json.util.TestJSONUtils)
+  testQuote_jsonFunction(net.sf.json.util.TestJSONUtils)
+  testAssertEquals_JSONFunction_String(net.sf.json.test.TestJSONAssert)
+  testAssertEquals_String_JSONFunction(net.sf.json.test.TestJSONAssert)
+  testBug_1650535_setters(net.sf.json.TestUserSubmitted)
+  testQuotedFunctions(net.sf.json.TestUserSubmitted)
+  testBug_1769559_array_conversion(net.sf.json.TestUserSubmitted)
+  testJSONArray_JavascriptComplian2t(net.sf.json.TestUserSubmitted)
+
+Tests in error:
+  testTypeConversion_String_to_JSONFunction(net.sf.json.groovy.TestMetaClasses
+  testParse_String_withWhiteSpacechars(net.sf.json.TestJSONFunction)
+  testParse_withSingleArg(net.sf.json.TestJSONFunction)
+  testParse_withMultipleArgs(net.sf.json.TestJSONFunction)
+  testParse_String(net.sf.json.TestJSONFunction)
+  JSONObject -&gt; ToJava[default](net.sf.json.TestJSONSerializer)
+  testToBean_nested(net.sf.json.TestJSONObject)
+  testToBean(net.sf.json.TestJSONObject)

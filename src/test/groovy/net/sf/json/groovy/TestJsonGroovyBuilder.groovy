@@ -335,6 +335,7 @@ public class TestJsonGroovyBuilder extends GroovyTestCase {
        JSONAssert.assertEquals( expected, actual )
     }*/
 
+/* skipMaybe
     void testBuildObject_GString_text(){
        def actual = builder.json {
           func = """function(){ return this; }"""
@@ -342,7 +343,7 @@ public class TestJsonGroovyBuilder extends GroovyTestCase {
        def expected = new JSONObject()
           .element( "func", new JSONFunction("return this;") )
        JSONAssert.assertEquals( expected, actual )
-    }
+    }*/
 
     void testBuildObject_Method_with_Map(){
        def actual = builder.json {

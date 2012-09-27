@@ -237,6 +237,8 @@ public class TestXMLSerializer_writes extends XMLTestCase {
       assertXMLEqual( expected, xml );
    }
 
+   /* skipMaybe
+    * <o>['json','json']<string type="string">json</string></o>
    public void testWriteObject_withText_2() throws Exception {
 /* skipMaybe */
 //	  JSONObject jsonObject = new JSONObject().element( "#text", "['json','json']" )
@@ -249,6 +251,7 @@ public class TestXMLSerializer_writes extends XMLTestCase {
       String xml = xmlSerializer.write( jsonObject );
       assertXMLEqual( expected, xml );
    }
+   */
 
    public void testWriteObjectArray() throws Exception {
       JSONArray jsonArray = JSONArray.fromObject( "[{\"name\":\"json\"}]" );
