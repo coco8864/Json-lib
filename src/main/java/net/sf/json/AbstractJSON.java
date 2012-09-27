@@ -228,11 +228,14 @@ abstract class AbstractJSON implements JSON {
 
    protected Object _processValue( Object value, JsonConfig jsonConfig ) {
       if( JSONNull.getInstance().equals( value ) ) {
+         if(value instanceof String && JsonConfig.skipMaybe()){
+             return value;
+         }
          return JSONNull.getInstance();
       } else if( Class.class.isAssignableFrom( value.getClass() ) || value instanceof Class ) {
          return ((Class) value).getName();
       } else if( JSONUtils.isFunction( value ) ) {
-         if( value instanceof String ) {
+         if( (!JsonConfig.skipMaybe()) && value instanceof String ) {
             value = JSONFunction.parse( (String) value );
          }
          return value;

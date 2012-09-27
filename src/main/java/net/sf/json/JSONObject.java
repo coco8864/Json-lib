@@ -902,7 +902,7 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
             throw new ClassCastException("JSON keys must be strings.");
          }
          String key = String.valueOf( k );
-         if( "null".equals( key )){
+         if( (!JsonConfig.skipMaybe()) && "null".equals( key )){
             throw new NullPointerException("JSON keys must not be null nor the 'null' string.");
          }
          if( exclusions.contains( key ) ){
@@ -951,6 +951,7 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
          Collection exclusions = jsonConfig.getMergedExcludes();
          PropertyFilter jsonPropertyFilter = jsonConfig.getJsonPropertyFilter();
          JSONObject jsonObject = new JSONObject();
+         boolean skipMaybe=JsonConfig.skipMaybe();
          for( ;; ){
             c = tokener.nextClean();
             switch( c ){
@@ -959,10 +960,19 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
                case '}':
                   fireObjectEndEvent( jsonConfig );
                   return jsonObject;
+               case '"':
+               case '\'':
+            	  if(skipMaybe){
+                      key=tokener.nextString(c);
+                      break;
+            	  }
                default:
                   tokener.back();
-                  key = tokener.nextValue( jsonConfig )
-                        .toString();
+                  if(skipMaybe){
+                     key = tokener.nextTo(":=");
+                  }else{
+                     key = tokener.nextValue(jsonConfig).toString();
+                  }
             }
 
             /*
@@ -1001,7 +1011,7 @@ public final class JSONObject extends AbstractJSON implements JSON, Map, Compara
                   continue;
                }
                if( jsonPropertyFilter == null || !jsonPropertyFilter.apply( tokener, key, v ) ){
-                  if( quoted && v instanceof String && (JSONUtils.mayBeJSON( (String) v ) || JSONUtils.isFunction( v ))){
+                  if( !skipMaybe && quoted && v instanceof String && (JSONUtils.mayBeJSON( (String) v ) || JSONUtils.isFunction( v ))){
                      v = JSONUtils.DOUBLE_QUOTE + v + JSONUtils.DOUBLE_QUOTE;
                   }
                   if( jsonObject.properties.containsKey( key ) ){

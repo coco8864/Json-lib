@@ -52,6 +52,15 @@ import org.apache.commons.lang.StringUtils;
  * @author Andres Almiray <aalmiray@users.sourceforge.net>
  */
 public class JsonConfig {
+   private static final String JSONLIB_SKIPMAYBE = "jsonlib.skipMaybe";
+   private static boolean skipMaybe=!"false".equals(System.getProperty(JSONLIB_SKIPMAYBE));
+   public static boolean skipMaybe(){
+      return skipMaybe;
+   }
+   public static void setSkipMaybe(boolean skip){
+      skipMaybe=skip;
+   }
+	
    public static final DefaultValueProcessorMatcher DEFAULT_DEFAULT_VALUE_PROCESSOR_MATCHER = DefaultValueProcessorMatcher.DEFAULT;
    public static final JsonBeanProcessorMatcher DEFAULT_JSON_BEAN_PROCESSOR_MATCHER = JsonBeanProcessorMatcher.DEFAULT;
    public static final JsonValueProcessorMatcher DEFAULT_JSON_VALUE_PROCESSOR_MATCHER = JsonValueProcessorMatcher.DEFAULT;

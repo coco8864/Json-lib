@@ -238,7 +238,12 @@ public class TestXMLSerializer_writes extends XMLTestCase {
    }
 
    public void testWriteObject_withText_2() throws Exception {
-      JSONObject jsonObject = new JSONObject().element( "#text", "['json','json']" )
+/* skipMaybe */
+//	  JSONObject jsonObject = new JSONObject().element( "#text", "['json','json']" )
+	  JSONArray array=new JSONArray();
+	  array.add("json");
+	  array.add("json");
+      JSONObject jsonObject = new JSONObject().element( "#text", array)
             .element( "string", "json" );
       String expected = "<o>jsonjson<string type=\"string\">json</string></o>";
       String xml = xmlSerializer.write( jsonObject );

@@ -109,10 +109,11 @@ public class TestJSONUtils extends TestCase {
       assertEquals( "\"\\b\\t\\n\\r\\f\"", JSONUtils.quote( "\b\t\n\r\f" ) );
    }
 
+   /* skipMaybe
    public void testQuote_jsonFunction() {
       JSONFunction jsonFunction = new JSONFunction( "a" );
       assertEquals( "function(){ a }", JSONUtils.quote( jsonFunction.toString() ) );
-   }
+   }*/
 
    public void testQuote_nullString() {
       assertEquals( "\"\"", JSONUtils.quote( null ) );

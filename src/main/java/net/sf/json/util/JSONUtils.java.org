@@ -386,10 +386,7 @@ public final class JSONUtils {
     * </ul>
     */
    public static boolean mayBeJSON( String string ) {
-       if(JsonConfig.skipMaybe()){
-    	   return false;
-       }
-	   return string != null
+      return string != null
             && ("null".equals( string )
                   || (string.startsWith( "[" ) && string.endsWith( "]" )) || (string.startsWith( "{" ) && string.endsWith( "}" )));
    }
@@ -472,7 +469,7 @@ public final class JSONUtils {
     * @return A String correctly formatted for insertion in a JSON text.
     */
    public static String quote( String string ) {
-      if( isFunction( string ) && (!JsonConfig.skipMaybe()) ) {
+      if( isFunction( string ) ) {
          return string;
       }
       if( string == null || string.length() == 0 ) {
@@ -684,15 +681,9 @@ public final class JSONUtils {
     */
    public static String valueToString( Object value ) {
       if( value == null || isNull( value ) ){
-         if(value instanceof String && JsonConfig.skipMaybe()){
-             return quote( value.toString() );
-         }
          return "null";
       }
       if( value instanceof JSONFunction ){
-          if(value instanceof String && JsonConfig.skipMaybe()){
-              return quote( value.toString() );
-          }
          return ((JSONFunction) value).toString();
       }
       if( value instanceof JSONString ){
