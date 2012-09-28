@@ -1,8 +1,8 @@
 Json-lib skip maybe decition
 =============
 
-we change Json-lib process skip JSONUtils#mayBeJSON.Reversibility is improved.  
-Set javaVm option -Djsonlib.skipMaybe=false if need original result.  
+We change Json-lib process skip JSONUtils#mayBeJSON.Reversibility is improved.  
+Set java vm option -Djsonlib.skipMaybe=false when you need original behavior.  
 [json-lib-2.4.1-skipmaybe-jdk13.jar](https://raw.github.com/coco8864/Json-lib/master/json-lib-2.4.1-skipmaybe-jdk13.jar)  
 [json-lib-2.4.1-skipmaybe-jdk15.jar](https://raw.github.com/coco8864/Json-lib/master/json-lib-2.4.1-skipmaybe-jdk15.jar)  
 
