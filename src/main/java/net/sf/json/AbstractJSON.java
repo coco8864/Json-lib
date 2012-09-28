@@ -248,6 +248,9 @@ abstract class AbstractJSON implements JSON {
       } else if( JSONUtils.isString( value ) ) {
          String str = String.valueOf( value );
          if( JSONUtils.hasQuotes( str ) ){
+            if(JsonConfig.skipMaybe()){//skipMaybe
+                return str;
+            }
             String stripped = JSONUtils.stripQuotes( str );
             if( JSONUtils.isFunction( stripped )){
                return JSONUtils.DOUBLE_QUOTE + stripped + JSONUtils.DOUBLE_QUOTE;

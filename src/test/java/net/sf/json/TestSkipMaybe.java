@@ -142,5 +142,30 @@ public class TestSkipMaybe extends TestCase {
        assertEquals( "{\"obj\":{\"function(){}\":123}}",obj.toString());
    }
    
+   public void test11(){
+       for(String value:values){
+    	   JSONObject obj=new JSONObject();
+    	   obj.element("key",value);
+           assertEquals(obj.get("key"),value);
+       }
+   }
+   
+   public void test12(){
+       for(String value:values){
+    	   JSONObject obj=new JSONObject();
+    	   String v="\"" + value +"\"";
+    	   obj.element("key",v);
+           assertEquals(obj.get("key"),v);
+       }
+   }
+   
+   public void test13(){
+       for(String value:values){
+    	   JSONObject obj=new JSONObject();
+    	   String v="'" + value +"'";
+    	   obj.element("key",v);
+           assertEquals(obj.get("key"),v);
+       }
+   }
    
 }

@@ -59,6 +59,7 @@ class TestMetaClasses extends GroovyTestCase {
 	   JSONAssert.assertEquals expected, actual
 	}*/
 
+/* skipMaybe
 	void testTypeConversion_String_to_JSONArray(){
 	   def expected = new JSONArray()
 	      .element(1)
@@ -66,7 +67,7 @@ class TestMetaClasses extends GroovyTestCase {
 	      .element(true)
 	   def actual = "[1,'2',true]" as JSONArray
 	   JSONAssert.assertEquals expected, actual
-	}
+	}*/
 
 	void testTypeConversion_String_to_JSONFunction(){
 	   def expected = new JSONFunction("return this;")

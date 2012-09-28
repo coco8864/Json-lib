@@ -18,6 +18,8 @@ Original
 1. {obj:{'{a:2}':123}}=>error:JSON keys must be strings.
 1. {obj:{'null':123}}=>error:JSON keys must be strings.
 1. {obj:{'function(){}':123}}=>error:JSON keys must be strings.
+1. jsonObj.element("key","\"[1,3]\"); =>{"key": "[1,3]"}
+1. jsonObj.element("key","\"{a:2}\"); =>{"key": "{a:2}"}
 
 SkipMaybe
 -------
@@ -31,3 +33,5 @@ SkipMaybe
 1. {obj:{'{a:2}':123}}=>{"obj":{"{a:2}":123}}
 1. {obj:{'null':123}}=>{"obj":{"null":123}}
 1. {obj:{'function(){}':123}}=>{"obj":{"function(){}":123}}
+1. jsonObj.element("key","\"[1,3]\"); =>{"key": "\"[1,3]\""}
+1. jsonObj.element("key","\"{a:2}\"); =>{"key": "\"{a:2}\""}
